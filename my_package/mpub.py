@@ -4,18 +4,26 @@ from std_msgs.msg import String
 
 class M_pub(Node):
   def __init__(self):
-    super().__init__()
+    super().__init__('mpub')
+    self.pub = self.create_publisher(String, 'message', 10)
+    self.create_timer(1, self.pubmessage)
+    self.count = 0
 
+  def pubmessage(self):
+    msg = String()
+    print(self.count)
+    msg.data = f'hello world {self.count}'
+    self.pub.publish(msg)
+    self.get_logger().info(f'Seding message: [{msg.data}]')
+    self.count += 1
 
 def main():
   rclpy.init()
   node = M_pub()
-  pub = node.create_publisher(String, 'messagepub' , 10)
-  msg = String()
-  msg.date = 'hello, world'
-  while True:
-    pub.publish(msg)
-  node.destroy_node()
+  try:
+    rclpy.spin(node)
+  except:
+    node.destroy_node()
 
 if __name__ == '__main__':
   main()
