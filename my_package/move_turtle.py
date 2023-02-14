@@ -7,7 +7,8 @@ class M_turtle(Node):
   def __init__(self):
     super().__init__('move_turtle')
     self.qos = QoSProfile(depth = 10)
-    self.pub = self.create_publisher(Twist, 'turtle1/cmd_vel', self.qos)
+    self.pub1 = self.create_publisher(Twist, 'turtle1/cmd_vel', self.qos)
+    self.pub2 = self.create_publisher(Twist, 'turtle2/cmd_vel', self.qos)
     self.create_timer(0.1, self.pubmessage)
     self.vel = 0.0
 
@@ -19,7 +20,17 @@ class M_turtle(Node):
     msg.angular.x = 0.0
     msg.angular.y = 0.0
     msg.angular.z = 2.5
+
+    msg2 = Twist()
+    msg2.linear.x = self.vel
+    msg2.linear.y = 0.0
+    msg2.linear.z = 0.0
+    msg2.angular.x = 0.0
+    msg2.angular.y = 0.0
+    msg2.angular.z = 2.5
+
     self.pub.publish(msg)
+    self.pub.publish(msg2)
     self.get_logger().info(f'Seding message: [{msg}]')
     self.vel += 0.04
     if self.vel > 3.0:
