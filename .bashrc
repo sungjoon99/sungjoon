@@ -140,7 +140,7 @@ export RCUTILS_LOGGING_BUFFERED_STREAM=1
 alias cw='cd ~/robot_ws'
 alias cs='cd ~/robot_ws/src'
 alias ccd='colcon_cd'
-alias sb='cd ~/source ~/.bashrc'
+alias sb='source ~/.bashrc'
 
 alias cb='cd ~/robot_ws && colcon build --symlink-install'
 alias cbs='colcon build --symlink-install'

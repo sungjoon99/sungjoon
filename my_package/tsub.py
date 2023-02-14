@@ -14,7 +14,7 @@ class T_sub(Node):
 
 def main():
   rclpy.init()
-  node = M_sub()
+  node = T_sub()
   try:
     rclpy.spin(node)
   except:
