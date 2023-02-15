@@ -5,9 +5,8 @@ import glob
 package_name = 'my_package'
 share_dir = 'share/' + package_name
 
-setup(
-    name=package_name,
-    version='0.0.0',
+setup((share_dir + '/launch', glob.glob(os.path.join('launch', '*.launch.py'))),
+        (share_dir + '/param', glob.glob(os.path.join('param', '*.yaml'))),
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
